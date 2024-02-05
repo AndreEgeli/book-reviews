@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  password String
+  reviews Review[]
+  tags Tag[]
+  profile Profile?
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  image String?
+  userId Int     @unique
+  user   User    @relation(fields: [userId], references: [id])
+}
+
+
+model Review {
+  id        Int     @id @default(autoincrement())
+  content   String?
+  rating Int?
+  created_at DateTime @default(now())
+  bookId    Int
+  userId    Int
+  tagId     Int
+  book      Book    @relation(fields: [bookId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
+  tag      Tag    @relation(fields: [tagId], references: [id])
+}
+
+//Tags is used for filtering and sorting. A suer defined tag can be used to filter and sort reviews
+model Tag  {
+  id        Int     @id @default(autoincrement())
+  name      String
+  color    String
+  userId    Int
+  user     User    @relation(fields: [userId], references: [id])
+  reviews   Review[]
+
+}
+
+// A book can have multiple reviews
+model Book {
+  id        Int     @id @default(autoincrement())
+  title     String
+  author    String
+  published DateTime
+  reviews   Review[]
+}
