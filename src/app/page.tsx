@@ -1,9 +1,10 @@
-import Image from "next/image";
+import Overview from '@/components/main/Overview';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <>
-      <h1 className="text-4xl">Heading</h1>
+      <Overview />
     </>
   );
 }
