@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Content, Inter } from 'next/font/google';
 import '@/styles/globals.css';
 import Navbar from '@/components/Navbar';
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="h-screen flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-white-500">
+        <main className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-white-500">
           <Navbar />
           {children}
         </main>

@@ -9,8 +9,8 @@ const Navbar = () => {
         <Link href="/">
           <BookText />
         </Link>
-        <Link className={buttonVariants()} href="/review">
-          Review
+        <Link className={buttonVariants()} href="/books">
+          Books
         </Link>
         <Link className={buttonVariants()} href="/sign-in">
           Sign in
