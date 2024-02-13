@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 
 import posts from '../../utils/posts';
-import SearchBar from './overview/SearchBar';
+import SearchBar from '../common/SearchBar';
 import GridLayout from './overview/GridLayout';
+import FilterBar from './overview/FilterBar';
+import AddNewReview from './overview/AddNewReview';
 
 function Overview() {
   const [searchSentence, setSearchSentence] = useState('');
@@ -19,12 +21,16 @@ function Overview() {
 
   return (
     <>
-      <div className="bg-slate-200 p-10 rounded-md">
+      <div className="w-5/6 float-left bg-slate-200 p-10 pt-10 rounded-md">
         <h1>Welcome André!</h1>
-        <SearchBar
-          searchSentence={searchSentence}
-          setSearchSentence={setSearchSentence}
-        />
+        <div className="flex">
+          <SearchBar
+            searchSentence={searchSentence}
+            setSearchSentence={setSearchSentence}
+          />
+          <FilterBar />
+          <AddNewReview />
+        </div>
         <GridLayout posts={posts} />
       </div>
     </>

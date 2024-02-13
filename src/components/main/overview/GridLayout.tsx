@@ -10,6 +10,7 @@ function GridLayout(props: GridLayoutProps) {
 
   return (
     <div>
+      <h1>Recent Reviews</h1>
       {posts.map((post) => {
         return <PostCard key={post.id} post={post} />;
       })}
