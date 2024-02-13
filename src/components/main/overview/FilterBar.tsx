@@ -80,8 +80,8 @@ function FilterBar() {
                 <SelectItem key={tag.id} value={tag.name}>
                   <span
                     className={cn(
-                      'rounded-md px-2 py-1 text-xs font-medium',
-                      tag.color
+                      'rounded-md py-1 text-xs font-medium',
+                      `bg-${tag.color}-500`
                     )}
                   >
                     {tag.name}

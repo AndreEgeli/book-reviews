@@ -21,7 +21,7 @@ function Overview() {
 
   return (
     <>
-      <div className="w-5/6 float-left bg-slate-200 p-10 pt-10 rounded-md">
+      <div className="w-5/6 bg-slate-100 p-10 pt-10 rounded-md">
         <h1>Welcome André!</h1>
         <div className="flex">
           <SearchBar
@@ -31,7 +31,9 @@ function Overview() {
           <FilterBar />
           <AddNewReview />
         </div>
-        <GridLayout posts={posts} />
+        <div className="float">
+          <GridLayout posts={posts} />
+        </div>
       </div>
     </>
   );

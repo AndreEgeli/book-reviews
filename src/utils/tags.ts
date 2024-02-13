@@ -2,27 +2,27 @@ const possibleTags = [
   {
     id: 1,
     name: 'Fantasy',
-    color: 'bg-red-500',
+    color: 'red',
   },
   {
     id: 2,
     name: 'Science Fiction',
-    color: 'bg-blue-500',
+    color: 'blue',
   },
   {
     id: 3,
     name: 'Mystery',
-    color: 'bg-yellow-500',
+    color: 'yellow',
   },
   {
     id: 4,
     name: 'self-help',
-    color: 'bg-green-500',
+    color: 'green',
   },
   {
     id: 5,
     name: 'biography',
-    color: 'bg-purple-500',
+    color: 'purple',
   },
 ];
 

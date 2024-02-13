@@ -11,9 +11,11 @@ function GridLayout(props: GridLayoutProps) {
   return (
     <div>
       <h1>Recent Reviews</h1>
-      {posts.map((post) => {
-        return <PostCard key={post.id} post={post} />;
-      })}
+      <div className="grid grid-cols-1 gap-4 w-full mt-4">
+        {posts.map((post) => {
+          return <PostCard key={post.id} post={post} />;
+        })}
+      </div>
     </div>
   );
 }
