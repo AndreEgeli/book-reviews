@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import posts from '../../utils/posts';
+import tags from '../../utils/tags';
 import SearchBar from '../common/SearchBar';
 import GridLayout from './overview/GridLayout';
 import FilterBar from './overview/FilterBar';
@@ -21,7 +22,7 @@ function Overview() {
 
   return (
     <>
-      <div className="w-5/6 bg-slate-100 p-10 pt-10 rounded-md">
+      <div>
         <h1>Welcome André!</h1>
         <div className="flex">
           <SearchBar

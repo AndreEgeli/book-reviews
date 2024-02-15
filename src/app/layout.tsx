@@ -12,15 +12,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-orange-500 to-white-500">
+      <body
+        className={
+          inter.className +
+          ' bg-gradient-to-b from-white via-orange-500 to-black'
+        }
+      >
+        <main className="min-h-screen flex flex-col justify-center items-center">
+          {/* Assuming Navbar is transparent */}
           <Navbar />
-          <div className="my-12">{children}</div>
+
+          {/* Give children some space around (here using padding for example) */}
+          <div className="relative w-5/6 max-w-2xl mx-auto my-12 bg-transparent">
+            {children}
+          </div>
         </main>
       </body>
     </html>

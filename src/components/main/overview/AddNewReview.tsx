@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FileTextIcon } from '@radix-ui/react-icons';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
 const ReviewIcon = (
   <svg
     width="15"
@@ -19,13 +27,77 @@ const ReviewIcon = (
 );
 
 function AddNewReview() {
+  // State for controlling dialog open/close
   const [newReviewOpen, setNewReviewOpen] = useState(false);
+  const [content, setContent] = useState('');
+  const [rating, setRating] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const reviewData = {
+      content,
+      rating,
+      shortDescription,
+      imageUrl,
+      // Any other information that needs to be sent to the backend
+    };
+    // Here you would send a request to your backend with reviewData
+  };
 
   return (
     <div>
-      <Button>
-        <FileTextIcon /> Add New
-      </Button>
+      <Dialog
+        open={newReviewOpen}
+        onOpenChange={(isOpen) => setNewReviewOpen(isOpen)}
+      >
+        <DialogTrigger>
+          <Button>
+            <FileTextIcon /> Add New
+          </Button>
+        </DialogTrigger>
+        <DialogOverlay />
+        <DialogContent>
+          <form onSubmit={handleFormSubmit}>
+            <label htmlFor="content">Review Content</label>
+            <textarea
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+
+            <label htmlFor="rating">Rating</label>
+            <input
+              id="rating"
+              type="number"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              required
+            />
+
+            <label htmlFor="shortDescription">Short Description</label>
+            <input
+              id="shortDescription"
+              type="text"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              required
+            />
+
+            <label htmlFor="imageUrl">Image URL</label>
+            <input
+              id="imageUrl"
+              type="text"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+
+            <button type="submit">Submit Review</button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

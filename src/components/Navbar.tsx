@@ -4,15 +4,23 @@ import { BookText } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <div className=" bg-zinc-100 py-2 border-b border-s-zinc-200 fixed w-full z-10 top-0">
-      <div className="container flex items-center justify-between">
-        <Link href="/">
-          <BookText />
+    <div className="bg-transparent py-2 fixed w-full z-10 top-0 text-white">
+      <div className="container flex items-center justify-start px-6">
+        <div data-tip="Home">
+          <Link href="/">
+            <BookText className="cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20" />
+          </Link>
+        </div>
+        <Link
+          className={`${buttonVariants()} cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-4 `}
+          href="/books"
+        >
+          See Books
         </Link>
-        <Link className={buttonVariants()} href="/books">
-          Books
-        </Link>
-        <Link className={buttonVariants()} href="/sign-in">
+        <Link
+          className={`${buttonVariants()} cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-auto`}
+          href="/sign-in"
+        >
           Sign in
         </Link>
       </div>

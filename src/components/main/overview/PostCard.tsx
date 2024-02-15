@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { cn } from '@/lib/utils';
 import possibleTags from '@/utils/tags';
 
 interface PostCardProps {
@@ -31,12 +31,6 @@ const Star = ({ number }) => {
 function PostCard(props: PostCardProps) {
   const { post } = props;
 
-  const color =
-    possibleTags.find((tag) => tag.name === post.tag)?.color ?? 'red';
-  const colorClass = `bg-${color}-500`;
-
-  console.log(colorClass);
-
   return (
     <div className="relative mx-auto w-full">
       <a
@@ -44,7 +38,7 @@ function PostCard(props: PostCardProps) {
         className="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full"
       >
         {/* <div className="flex shadow p-4 rounded-lg bg-white"> */}
-        <div className="flex shadow p-4 rounded-lg">
+        <div className="flex shadow p-4 rounded-lg bg-white">
           <div className="md:w-4/10 mr-4">
             {' '}
             {/* Adjust this className for your image */}
