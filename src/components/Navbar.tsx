@@ -12,13 +12,13 @@ const Navbar = () => {
           </Link>
         </div>
         <Link
-          className={`${buttonVariants()} cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-4 `}
+          className={` cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-4 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background`}
           href="/books"
         >
           See Books
         </Link>
         <Link
-          className={`${buttonVariants()} cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-auto`}
+          className={`cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-auto whitespace-nowrap rounded-md text-sm font-medium ring-offset-background`}
           href="/sign-in"
         >
           Sign in

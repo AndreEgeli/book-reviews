@@ -1,49 +1,57 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FileTextIcon } from '@radix-ui/react-icons';
-
+import { toast } from 'sonner';
 import {
   Dialog,
   DialogContent,
-  DialogOverlay,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { useForm } from 'react-hook-form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
-const ReviewIcon = (
-  <svg
-    width="15"
-    height="15"
-    viewBox="0 0 15 15"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M3 2.5C3 2.22386 3.22386 2 3.5 2H9.08579C9.21839 2 9.34557 2.05268 9.43934 2.14645L11.8536 4.56066C11.9473 4.65443 12 4.78161 12 4.91421V12.5C12 12.7761 11.7761 13 11.5 13H3.5C3.22386 13 3 12.7761 3 12.5V2.5ZM3.5 1C2.67157 1 2 1.67157 2 2.5V12.5C2 13.3284 2.67157 14 3.5 14H11.5C12.3284 14 13 13.3284 13 12.5V4.91421C13 4.51639 12.842 4.13486 12.5607 3.85355L10.1464 1.43934C9.86514 1.15804 9.48361 1 9.08579 1H3.5ZM4.5 4C4.22386 4 4 4.22386 4 4.5C4 4.77614 4.22386 5 4.5 5H7.5C7.77614 5 8 4.77614 8 4.5C8 4.22386 7.77614 4 7.5 4H4.5ZM4.5 7C4.22386 7 4 7.22386 4 7.5C4 7.77614 4.22386 8 4.5 8H10.5C10.7761 8 11 7.77614 11 7.5C11 7.22386 10.7761 7 10.5 7H4.5ZM4.5 10C4.22386 10 4 10.2239 4 10.5C4 10.7761 4.22386 11 4.5 11H10.5C10.7761 11 11 10.7761 11 10.5C11 10.2239 10.7761 10 10.5 10H4.5Z"
-      fill="currentColor"
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-    ></path>
-  </svg>
-);
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Textarea } from '@/components/ui/textarea';
+
+const FormSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(100),
+  content: z.string().min(1, 'Content is required').max(1000),
+  rating: z.number().min(1, 'Rating is required').max(5, 'Rating is required'),
+  imageUrl: z.string().url('Invalid URL'),
+  dateRead: z.date(),
+});
 
 function AddNewReview() {
   // State for controlling dialog open/close
   const [newReviewOpen, setNewReviewOpen] = useState(false);
-  const [content, setContent] = useState('');
-  const [rating, setRating] = useState('');
-  const [shortDescription, setShortDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const reviewData = {
-      content,
-      rating,
-      shortDescription,
-      imageUrl,
-      // Any other information that needs to be sent to the backend
-    };
-    // Here you would send a request to your backend with reviewData
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      title: '',
+      content: '',
+      rating: 1,
+      imageUrl: '',
+      dateRead: new Date(),
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    console.log(values);
+    toast('New review successfully created!');
   };
 
   return (
@@ -57,45 +65,70 @@ function AddNewReview() {
             <FileTextIcon /> Add New
           </Button>
         </DialogTrigger>
-        <DialogOverlay />
-        <DialogContent>
-          <form onSubmit={handleFormSubmit}>
-            <label htmlFor="content">Review Content</label>
-            <textarea
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-            />
+        <DialogContent className="sm:max-w-[800px]">
+          <DialogHeader></DialogHeader>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+              <div className="flex">
+                <div className="w-2/5 space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="title"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                          <Input placeholder="title" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
-            <label htmlFor="rating">Rating</label>
-            <input
-              id="rating"
-              type="number"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              required
-            />
-
-            <label htmlFor="shortDescription">Short Description</label>
-            <input
-              id="shortDescription"
-              type="text"
-              value={shortDescription}
-              onChange={(e) => setShortDescription(e.target.value)}
-              required
-            />
-
-            <label htmlFor="imageUrl">Image URL</label>
-            <input
-              id="imageUrl"
-              type="text"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-
-            <button type="submit">Submit Review</button>
-          </form>
+                  <FormField
+                    control={form.control}
+                    name="rating"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Rating</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="1-5" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {/* Add more fields as you need here */}
+                </div>
+                <div className="mx-4 w-3/5 space-y-2">
+                  <FormField
+                    control={form.control}
+                    name="content"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Review</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us a little bit about yourself"
+                            className="resize-none h-full"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          You can also ask open AI for a review
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="button">Ask AI</Button>
+                </div>
+              </div>
+              <Button className="w-full mt-6 ml-auto" type="submit">
+                Add Review
+              </Button>
+            </form>
+          </Form>
         </DialogContent>
       </Dialog>
     </div>
