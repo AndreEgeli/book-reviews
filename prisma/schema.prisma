@@ -32,9 +32,11 @@ model Profile {
 
 model Review {
   id        Int     @id @default(autoincrement())
+  title     String
   content   String
   rating Int
   created_at DateTime @default(now())
+  dateRead DateTime
   shortDescription String
   imageUrl String
   bookId    Int

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { buttonVariants } from './ui/button';
 import { BookText } from 'lucide-react';
 
 const Navbar = () => {
