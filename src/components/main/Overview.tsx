@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 
 import posts from '../../utils/posts';
@@ -12,14 +11,6 @@ import AddNewReview from './overview/AddNewReview';
 function Overview() {
   const [searchSentence, setSearchSentence] = useState('');
 
-  useEffect(() => {
-    posts.filter((post) => {
-      if (post.title.toLowerCase().includes(searchSentence.toLowerCase())) {
-        console.log('post.title: ', post.title);
-      }
-    });
-  }, [searchSentence]);
-
   return (
     <>
       <div>
@@ -29,8 +20,8 @@ function Overview() {
             searchSentence={searchSentence}
             setSearchSentence={setSearchSentence}
           />
-          <FilterBar />
-          <AddNewReview />
+          {/* <FilterBar /> */}
+          {/* <AddNewReview /> */}
         </div>
         <div className="float">
           <GridLayout posts={posts} />
