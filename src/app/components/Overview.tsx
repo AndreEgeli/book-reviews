@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import posts from '../../utils/posts';
 import tags from '../../utils/tags';
-import SearchBar from '../common/SearchBar';
+import SearchBar from '@/components/common/SearchBar';
 import GridLayout from './overview/GridLayout';
 import FilterBar from './overview/FilterBar';
 import AddNewReview from './overview/AddNewReview';
@@ -20,8 +20,8 @@ function Overview() {
             searchSentence={searchSentence}
             setSearchSentence={setSearchSentence}
           />
-          {/* <FilterBar /> */}
-          {/* <AddNewReview /> */}
+          <FilterBar />
+          <AddNewReview />
         </div>
         <div className="float">
           <GridLayout posts={posts} />
