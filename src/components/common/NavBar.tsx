@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { BookText } from 'lucide-react';
 
-import { createClient } from '@/utils/supabase/server';
+import { supabaseServer } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
-const Navbar = async () => {
+const NavBar = async () => {
   // Need to get user
-  const supabase = createClient();
+  const supabase = supabaseServer();
 
   const {
     data: { user },
@@ -15,25 +15,19 @@ const Navbar = async () => {
   const signOut = async () => {
     'use server';
 
-    const supabase = createClient();
+    const supabase = supabaseServer();
     await supabase.auth.signOut();
     return redirect('/login');
   };
 
   return (
-    <div className="bg-transparent py-2 fixed w-full z-10 top-0 text-white">
+    <div className="bg-transparent py-1 fixed w-full z-10 top-0 text-white">
       <div className="container flex items-center justify-start px-6">
         <div data-tip="Home">
           <Link href="/">
             <BookText className="cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20" />
           </Link>
         </div>
-        <Link
-          className={` cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-4 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background`}
-          href="/books"
-        >
-          See Books
-        </Link>
         {user ? (
           <div className="cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20 ml-auto whitespace-nowrap rounded-md text-sm font-medium ring-offset-background">
             <form action={signOut}>
@@ -55,4 +49,4 @@ const Navbar = async () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

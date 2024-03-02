@@ -64,7 +64,7 @@ function PostCard(props: PostCardProps) {
             </p>
             <div className="float-right flex items-center mt-2">
               <span className="text-sm">{post.rating}</span>
-              <Star className="mr-2" number={post.rating} />
+              <Star number={post.rating} />
             </div>
           </div>
           {/* </div> */}

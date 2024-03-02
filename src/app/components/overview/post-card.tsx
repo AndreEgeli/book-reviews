@@ -29,7 +29,7 @@ export function PostCard(props: PostCardProps) {
             alt="The Silent Patient"
             className="aspect-cover rounded-lg overflow-hidden w-300"
             height={450}
-            src="/placeholder.svg"
+            src={'/next.svg'}
             width={300}
           />
         </div>

@@ -35,7 +35,6 @@ const FormSchema = z.object({
 });
 
 function AddNewReview() {
-  // State for controlling dialog open/close
   const [newReviewOpen, setNewReviewOpen] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -114,10 +113,6 @@ function AddNewReview() {
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription>
-                          You can also ask open AI for a review
-                        </FormDescription>
-                        <FormMessage />
                       </FormItem>
                     )}
                   />

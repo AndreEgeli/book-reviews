@@ -13,19 +13,17 @@ function Overview() {
 
   return (
     <>
-      <div>
-        <h1>Welcome André!</h1>
-        <div className="flex">
-          <SearchBar
-            searchSentence={searchSentence}
-            setSearchSentence={setSearchSentence}
-          />
-          <FilterBar />
-          <AddNewReview />
-        </div>
-        <div className="float">
-          <GridLayout posts={posts} />
-        </div>
+      <h1>Welcome André!</h1>
+      <div className="flex">
+        <SearchBar
+          searchSentence={searchSentence}
+          setSearchSentence={setSearchSentence}
+        />
+        <FilterBar />
+        {/* <AddNewReview /> */}
+      </div>
+      <div className="float">
+        <GridLayout posts={posts} />
       </div>
     </>
   );
