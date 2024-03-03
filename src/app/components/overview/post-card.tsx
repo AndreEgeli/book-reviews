@@ -22,9 +22,9 @@ function formatPostDate(postDate: string) {
 export function PostCard(props: PostCardProps) {
   const { post } = props;
   return (
-    <Card className="w-full max-w-md">
-      <div className="grid md:grid-cols-2 gap-6 items-start">
-        <div className="hidden md:flex items-start">
+    <Card className="mr-2">
+      <div className="grid md:flex gap-6 items-start">
+        <div className="md:w-1/3">
           <img
             alt="The Silent Patient"
             className="aspect-cover rounded-lg overflow-hidden w-300"
@@ -33,7 +33,7 @@ export function PostCard(props: PostCardProps) {
             width={300}
           />
         </div>
-        <div className="grid gap-2">
+        <div className="md:w-2/3 grid gap-2">
           <CardHeader className="p-6">
             <CardTitle className="text-2xl">{post.title}</CardTitle>
             <CardDescription className="text-sm">

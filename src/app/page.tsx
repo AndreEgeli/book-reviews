@@ -5,9 +5,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col justify-center items-center">
-        <Overview />
-      </div>
+      <Overview />
     </>
   );
 }

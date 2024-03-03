@@ -12,20 +12,25 @@ function Overview() {
   const [searchSentence, setSearchSentence] = useState('');
 
   return (
-    <>
-      <h1>Welcome André!</h1>
-      <div className="flex">
-        <SearchBar
-          searchSentence={searchSentence}
-          setSearchSentence={setSearchSentence}
-        />
-        <FilterBar />
-        {/* <AddNewReview /> */}
+    <div className="pt-12 border border-gray-100">
+      <div className="flex border border-gray-300 rounded">
+        <div className="w-1/3">
+          <FilterBar />
+        </div>
+        <div className="">
+          <h1>Welcome André!</h1>
+          <SearchBar
+            searchSentence={searchSentence}
+            setSearchSentence={setSearchSentence}
+          />
+
+          {/* <AddNewReview /> */}
+          <div className="flex-grow">
+            <GridLayout posts={posts} />
+          </div>
+        </div>
       </div>
-      <div className="float">
-        <GridLayout posts={posts} />
-      </div>
-    </>
+    </div>
   );
 }
 

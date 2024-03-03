@@ -21,8 +21,8 @@ const NavBar = async () => {
   };
 
   return (
-    <div className="bg-transparent py-1 fixed w-full z-10 top-0 text-white">
-      <div className="container flex items-center justify-start px-6">
+    <div className="fixed bg-white top-0 insetx-0 h-12 w-full text-black z-10">
+      <div className="container flex items-center justify-start px-6 mt-2">
         <div data-tip="Home">
           <Link href="/">
             <BookText className="cursor-pointer text-black bg-transparent hover:bg-white hover:bg-opacity-20" />

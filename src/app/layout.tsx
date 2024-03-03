@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="min-h-screen">
+          <main className="min-h-screen w-full">
             <div>{children}</div>
           </main>
           <Toaster />

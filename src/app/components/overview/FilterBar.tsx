@@ -18,11 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import possibleTags from '@/utils/tags';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-
-const overlayClasses = 'bg-black bg-opacity-60 fixed inset-0';
-const contentClasses =
-  'bg-white rounded-md shadow-xl fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-md max-h-4/5 p-6 outline-none focus:outline-none';
+// ... (imports and other code)
 
 function FilterBar() {
   const [date, setDate] = React.useState<DateRange | undefined>({
@@ -31,75 +27,69 @@ function FilterBar() {
   });
 
   return (
-    <div className="mx-2">
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>Show Filters</Button>
-        </DialogTrigger>
-        <DialogContent className={contentClasses}>
-          <div className="flex">
-            <div className={cn('grid gap-2')}>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    id="date"
-                    variant={'outline'}
+    <div className="mx-2 pt-20">
+      <div className="fixed border border-gray-200 p-4 rounded">
+        <h4>Filters</h4>
+        <div className={cn('grid gap-2')}>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                id="date"
+                variant={'outline'}
+                className={cn(
+                  'justify-start text-left font-normal w-full', // Adjust width to 100%
+                  !date && 'text-muted-foreground'
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date?.from ? (
+                  date.to ? (
+                    <>
+                      {format(date.from, 'LLL dd, y')} -{' '}
+                      {format(date.to, 'LLL dd, y')}
+                    </>
+                  ) : (
+                    format(date.from, 'LLL dd, y')
+                  )
+                ) : (
+                  <span>Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={date?.from}
+                selected={date}
+                onSelect={setDate}
+                numberOfMonths={2}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="m-2">
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a tag" />
+            </SelectTrigger>
+            <SelectContent>
+              {possibleTags.map((tag) => (
+                <SelectItem key={tag.id} value={tag.name}>
+                  <span
                     className={cn(
-                      'w-[300px] justify-start text-left font-normal',
-                      !date && 'text-muted-foreground'
+                      'rounded-md py-1 text-xs font-medium',
+                      `${tag.color}`
                     )}
                   >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date?.from ? (
-                      date.to ? (
-                        <>
-                          {format(date.from, 'LLL dd, y')} -{' '}
-                          {format(date.to, 'LLL dd, y')}
-                        </>
-                      ) : (
-                        format(date.from, 'LLL dd, y')
-                      )
-                    ) : (
-                      <span>Pick a date</span>
-                    )}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    initialFocus
-                    mode="range"
-                    defaultMonth={date?.from}
-                    selected={date}
-                    onSelect={setDate}
-                    numberOfMonths={2}
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="mx-2">
-              <Select>
-                <SelectTrigger className="w-[280px]">
-                  <SelectValue placeholder="Select a tag" />
-                </SelectTrigger>
-                <SelectContent>
-                  {possibleTags.map((tag) => (
-                    <SelectItem key={tag.id} value={tag.name}>
-                      <span
-                        className={cn(
-                          'rounded-md py-1 text-xs font-medium',
-                          `${tag.color}`
-                        )}
-                      >
-                        {tag.name}
-                      </span>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+                    {tag.name}
+                  </span>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
     </div>
   );
 }
